@@ -19,6 +19,13 @@ const RaiseTicket = sequelize.define('RaiseTicket', {
         type: DataTypes.STRING,
         allowNull: true,
     },
+    ticketStatus: {
+        type: DataTypes.STRING,
+        default: 'pending',
+        validate: {
+            isIn: [["pending", "inProgress","resolved"]]
+        },
+    },
 }, {
     tableName: 'RaiseTickets',
     timestamps: true,
