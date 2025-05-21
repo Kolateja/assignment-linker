@@ -14,6 +14,17 @@ const OrderAssignment = sequelize.define('OrderAssignment', {
             isIn: [["pending", "inProgress", "awaitingClarification", "completed"]]
         },
     },
+    paymentStatus: {
+        type: DataTypes.STRING,
+        default: 'pending',
+        validate: {
+            isIn: [["pending", "inProgress", "completed"]]
+        },
+    },
+    totalAmount: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
     subject: {
         type: DataTypes.STRING,
         allowNull: false,
