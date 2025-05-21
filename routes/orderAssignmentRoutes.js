@@ -140,8 +140,18 @@ router.put('/:id', requireAuth, upload.single('file'), async (req, res) => {
 
         const { subject, university, deadline, wordCount, pages, description, orderStatus,paymentStatus,totalAmount } = req.body;
         const filePath = req.file ? req.file.path : assignment.filePath;
-
-        await assignment.update({ subject, university, deadline, wordCount, pages, description, filePath, orderStatus,paymentStatus,totalAmount });
+        await assignment.update({
+            subject: subject ?? assignment.subject,
+            university: university ?? assignment.university,
+            deadline: deadline ?? assignment.deadline,
+            wordCount: wordCount ?? assignment.wordCount,
+            pages: pages ?? assignment.pages,
+            description: description ?? assignment.description,
+            filePath,
+            orderStatus: orderStatus ?? assignment.orderStatus,
+            paymentStatus: paymentStatus ?? assignment.paymentStatus,
+            totalAmount: totalAmount ?? assignment.totalAmount
+          });
 
         return successResponse(res, 'Assignment updated', assignment);
     } catch (err) {
